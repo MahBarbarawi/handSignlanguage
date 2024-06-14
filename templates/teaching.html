@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ArSLTranslator</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- <script src="{{ url_for('static', filename='jscode.js') }}"></script> -->
+  </head>
+  <body>
+    <header>
+      <h1>ArSLTranslator</h1>
+    </header>
+
+    <div class="body-container">
+      <div class="menu-section section">
+        <ul>
+          <li><a href="{{ url_for('index') }}">Detiction</a></li>
+        </ul>
+      </div>
+
+      <div class="card-section section">
+        <h2>Sign Language</h2>
+        <div class="card-container">
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/ain.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>ع</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/alef.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>ا</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/beh.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>ب</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/dad.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>ض</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/dal.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>د</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/feh.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>ف</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/ghain.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>غ</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/hah.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>ح</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/heh.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>ه</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/jeem.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>ج</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/kaf.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>ك</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/khah.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>خ</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/lam.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>ل</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/meem.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>م</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/noon.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>ن</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/qaf.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>ق</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/sad.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>ص</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/seen.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>س</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/sheen.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>ش</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/tah.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>ط</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/teh.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>ت</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/thal.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>ذ</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/theh.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>ث</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/waw.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>و</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/yaa.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>ي</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/zah.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>ظ</h3></div>
+          </div>
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='signlanguage/zain.jpg') }}"
+              alt="Ain"
+            />
+            <div class="card-text"><h3>ز</h3></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="footer-content">
+        <div class="creator-card">
+          <img
+            src="{{ url_for('static', filename='Mahmoud.jpg') }}"
+            alt="Creator 1"
+          />
+          <h2>Data Scientist & AI</h2>
+          <h3>Mahmoud Barbarawi</h3>
+        </div>
+        <div class="creator-card">
+          <img
+            src="{{ url_for('static', filename='hanan.jpg') }}"
+            alt="Creator 2"
+          />
+          <h2>Speech Pathologist</h2>
+          <h3>Hanan</h3>
+        </div>
+        <div class="creator-card">
+          <img
+            src="{{ url_for('static', filename='Sereen.jpg') }}"
+            alt="Creator 3"
+          />
+          <h2>Speech Pathologist</h2>
+          <h3>Serine</h3>
+        </div>
+        <div class="creator-card">
+          <img
+            src="{{ url_for('static', filename='AlBatool.jpg') }}"
+            alt="Creator 4"
+          />
+          <h2>Speech Pathologist</h2>
+          <h3>Al-Batool</h3>
+        </div>
+      </div>
+      <p>About the Project:</p>
+      <p>The general goal of this program is:</p>
+      <p>
+        this program has been developed to make communication with deaf
+        indivisuals easier
+      </p>
+      <p>For whome it's designed: Deaf indivisuals who uses sign language</p>
+      <p>Briefly explain how to use:</p>
+      <p>
+        A website that can be easily opened on Google, where it can capture the
+        hand gestures of the deaf person through the camera and translate them
+        into written Arabic text that the natural person can read to facilitate
+        communication between them without the need for the natural person to
+        learn Sign Language
+      </p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ArSLTranslator</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>ArSLTranslator</h1>
+    </header>
+
+    <div class="body-container">
+      <div class="menu-section section">
+        <ul>
+          <li>
+            <a href="{{ url_for('teaching') }}">Sign Language Gestures</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="video-section section">
+        <h1>Live Camera Capture</h1>
+        <video id="videoElement" autoplay></video>
+      </div>
+
+      <div class="description-section section">
+        <h2>Translation</h2>
+        <h1><div id="status" style="font-size: 60px">ss</div></h1>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-content">
+        <div class="creator-card">
+          <img
+            src="{{ url_for('static', filename='mahmoud.jpg') }}"
+            alt="Creator 1"
+          />
+          <h2>Data Scientist & AI</h2>
+          <h3>Mahmoud Barbarawi</h3>
+        </div>
+        <div class="creator-card">
+          <img
+            src="{{ url_for('static', filename='hanan.jpg') }}"
+            alt="Creator 2"
+          />
+          <h2>Speech Pathologist</h2>
+          <h3>Hanan</h3>
+        </div>
+        <div class="creator-card">
+          <img
+            src="{{ url_for('static', filename='Sereen.jpg') }}"
+            alt="Creator 3"
+          />
+          <h2>Speech Pathologist</h2>
+          <h3>Serine</h3>
+        </div>
+        <div class="creator-card">
+          <img
+            src="{{ url_for('static', filename='AlBatool.jpg') }}"
+            alt="Creator 4"
+          />
+          <h2>Speech Pathologist</h2>
+          <h3>Al-Batool</h3>
+        </div>
+      </div>
+      <p>About the Project:</p>
+      <p>The general goal of this program is:</p>
+      <p>
+        this program has been developed to make communication with deaf
+        indivisuals easier
+      </p>
+      <p>For whome it's designed: Deaf indivisuals who uses sign language</p>
+      <p>Briefly explain how to use:</p>
+      <p>
+        A website that can be easily opened on Google, where it can capture the
+        hand gestures of the deaf person through the camera and translate them
+        into written Arabic text that the natural person can read to facilitate
+        communication between them without the need for the natural person to
+        learn Sign Language
+      </p>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var videoElement = document.getElementById("videoElement");
+        var canvasElement = document.createElement("canvas");
+        var canvasContext = canvasElement.getContext("2d");
+        var captureInterval;
+
+        navigator.mediaDevices
+          .getUserMedia({ video: true })
+          .then(function (stream) {
+            videoElement.srcObject = stream;
+            captureInterval = setInterval(captureFrame, 1050); // Capture frames every second
+          })
+          .catch(function (error) {
+            console.log("Error accessing webcam:", error);
+          });
+
+        function captureFrame() {
+          canvasElement.width = videoElement.videoWidth;
+          canvasElement.height = videoElement.videoHeight;
+          canvasContext.drawImage(videoElement, 0, 0);
+          var imageData = canvasElement.toDataURL("image/jpeg");
+          sendVideoData(imageData);
+        }
+
+        function sendVideoData(imageData) {
+          // Make an AJAX request to Flask
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", "/process_frame", true); // Update the route to match the Flask endpoint
+          xhr.setRequestHeader("Content-Type", "application/json");
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+              // Handle the response from Flask
+              var response = JSON.parse(xhr.responseText);
+              displayResult(response.translation);
+            }
+          };
+          var data = JSON.stringify({ frame: imageData }); // Update the data field to match the expected parameter in the Flask endpoint
+          xhr.send(data);
+        }
+
+        function displayResult(translation) {
+          var resultElement = document.getElementById("status");
+          resultElement.textContent = translation;
+        }
+      });
+    </script>
+  </body>
+</html>
